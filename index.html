@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Ad Studio | AI-Powered 3D Character Advertising</title>
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0A2E73;
+            --pink: #FF5C8A;
+            --white: #FFFFFF;
+            --light-blue: #F4F8FC;
+            --light-pink: #FFF3F7;
+            --charcoal: #222222;
+            --gray-text: #555555;
+            --light-gray-border: #E2E8F0;
+            --shadow-sm: 0 4px 6px -1px rgba(10, 46, 115, 0.05), 0 2px 4px -1px rgba(10, 46, 115, 0.03);
+            --shadow-md: 0 10px 25px -5px rgba(10, 46, 115, 0.08), 0 8px 10px -6px rgba(10, 46, 115, 0.03);
+            --shadow-lg: 0 20px 35px -10px rgba(10, 46, 115, 0.12), 0 10px 15px -5px rgba(10, 46, 115, 0.04);
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--charcoal);
+            background-color: var(--white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Typography Scaffolding */
+        h1, h2, h3, h4 {
+            color: var(--navy);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+        }
+
+        p {
+            color: var(--gray-text);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Layout Helpers */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        /* Component Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 32px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.03em;
+            border-radius: var(--radius-sm);
+            transition: all 0.25s ease;
+            cursor: pointer;
+            border: none;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--pink);
+            color: var(--white);
+            box-shadow: 0 4px 14px rgba(255, 92, 138, 0.35);
+        }
+
+        .btn-primary:hover {
+            background-color: #e04b75;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 92, 138, 0.45);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--navy);
+            border: 2px solid var(--navy);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--navy);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .eyebrow {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--pink);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto 60px auto;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        /* Navigation */
+        .navbar {
+            height: 90px;
+            display: flex;
+            align-items: center;
+            background-color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--light-gray-border);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.25rem;
+            letter-spacing: 0.05em;
+            color: var(--navy);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--navy);
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--pink);
+        }
+
+        .nav-cta {
+            padding: 10px 20px;
+            font-size: 0.85rem;
+            background-color: var(--navy);
+            color: var(--white);
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        .nav-cta:hover {
+            background-color: var(--pink);
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: var(--light-blue);
+            padding: 80px 0 100px 0;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.25rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-subhead {
+            font-size: 1.2rem;
+            color: var(--navy);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .hero-support {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--gray-text);
+            margin-bottom: 32px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .character-frame {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--light-gray-border);
+        }
+
+        .ava-render {
+            width: 100%;
+            height: 480px;
+            border-radius: var(--radius-md);
+            background-color: #111e38;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* CSS-rendered Ava Visual Frame */
+        .ava-avatar-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            background: linear-gradient(180deg, rgba(10,46,115,0.2) 0%, rgba(10,46,115,0.8) 100%),
+                        radial-gradient(circle at 50% 30%, #FF5C8A 0%, transparent 60%);
+        }
+
+        .ava-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--navy);
+            backdrop-filter: blur(4px);
+        }
+
+        .video-play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 64px;
+            height: 64px;
+            background-color: var(--pink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(255, 92, 138, 0.6);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .video-play-overlay:hover {
+            width: 72px;
+            height: 72px;
+        }
+
+        .play-icon {
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 16px solid var(--white);
+            margin-left: 4px;
+        }
+
+        .hero-tagline {
+            text-align: center;
+            padding: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        /* Section 2 — Problem */
+        .problem-section {
+            background-color: var(--white);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .problem-card {
+            background: var(--light-blue);
+            border-radius: var(--radius-md);
+            padding: 40px 30px;
+            border: 1px solid var(--light-gray-border);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-50px);
+        }
+
+        .problem-card .card-indicator {
+            width: 40px;
+            height: 4px;
+            background-color: var(--pink);
+            margin: 0 auto 20px auto;
+            border-radius: 2px;
+        }
+
+        .problem-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+
+        .problem-bottom {
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--navy);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Section 3 — Solution */
+        .solution-section {
+            background-color: var(--light-blue);
+        }
+
+        .solution-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .solution-body {
+            font-size: 1.2rem;
+            margin-bottom: 24px;
+        }
+
+        .solution-highlight {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--navy);
+            background-color: var(--light-pink);
+            padding: 20px;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--pink);
+            margin-bottom: 60px;
+        }
+
+        .process-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--light-gray-border);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .process-step {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--navy);
+            letter-spacing: 0.05em;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .process-arrow {
+            color: var(--pink);
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        /* Section 4 — Case Study (Ava) */
+        .case-study-section {
+            background: var(--white);
+        }
+
+        .case-intro {
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        .case-intro h2 {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .case-sub {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--pink);
+            margin-bottom: 16px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .gallery-item {
+            background-color: var(--navy);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            position: relative;
+            min-height: 220px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .gi-1 { grid-column: span 4; }
+        .gi-2 { grid-column: span 4; }
+        .gi-3 { grid-column: span 4; }
+        .gi-4 { grid-column: span 6; }
+        .gi-5 { grid-column: span 6; }
+
+        .gallery-visual {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            box-sizing: border-box;
+            background: linear-gradient(0deg, rgba(10,46,115,0.9) 0%, rgba(10,46,115,0.2) 70%),
+                        radial-gradient(circle at 50% 30%, rgba(255,92,138,0.4) 0%, transparent 70%);
+        }
+
+        .gallery-label {
+            color: var(--white);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .gallery-item .play-btn-small {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 48px;
+            height: 48px;
+            background: var(--pink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .gallery-item .play-btn-small:hover {
+            width: 56px;
+            height: 56px;
+        }
+
+        /* Section 5 — What We Create */
+        .services-section {
+            background-color: var(--light-blue);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .service-card {
+            background-color: var(--white);
+            border-radius: var(--radius-md);
+            padding: 36px 28px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--light-gray-border);
+        }
+
+        .service-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-card h3::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--pink);
+            border-radius: 50%;
+        }
+
+        /* Section 6 — Who It's For */
+        .audience-section {
+            background-color: var(--white);
+        }
+
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .audience-card {
+            background-color: var(--light-blue);
+            border-radius: var(--radius-sm);
+            padding: 24px;
+            text-align: center;
+            font-weight: 700;
+            color: var(--navy);
+            border: 1px solid var(--light-gray-border);
+            letter-spacing: 0.03em;
+        }
+
+        .audience-support {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--gray-text);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* Section 7 — How It Works */
+        .process-section {
+            background-color: var(--light-blue);
+        }
+
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            position: relative;
+        }
+
+        .timeline-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 30px 20px;
+            border: 1px solid var(--light-gray-border);
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-num {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--pink);
+            margin-bottom: 12px;
+        }
+
+        .timeline-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .timeline-card p {
+            font-size: 0.88rem;
+        }
+
+        /* Section 8 — Deliverables */
+        .deliverables-section {
+            background-color: var(--white);
+        }
+
+        .deliverables-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            color: var(--navy);
+            background: var(--light-blue);
+            padding: 12px 20px;
+            border-radius: var(--radius-sm);
+        }
+
+        .check-item::before {
+            content: '✓';
+            color: var(--pink);
+            font-weight: 800;
+        }
+
+        .deliverable-highlight-card {
+            background-color: var(--navy);
+            color: var(--white);
+            padding: 50px 40px;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .deliverable-highlight-card p {
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.8;
+        }
+
+        .deliverable-highlight-card span {
+            color: var(--pink);
+        }
+
+        /* Section 9 — Packages */
+        .packages-section {
+            background-color: var(--light-blue);
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        .pkg-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 40px 30px;
+            border: 1px solid var(--light-gray-border);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .pkg-card.featured {
+            border: 2px solid var(--pink);
+            box-shadow: var(--shadow-lg);
+            transform: scale(1.03);
+        }
+
+        .badge-popular {
+            position: absolute;
+            top: -14px;
+            right: 30px;
+            background: var(--pink);
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 12px;
+            text-transform: uppercase;
+        }
+
+        .pkg-title {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .pkg-desc {
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+            min-height: 40px;
+        }
+
+        .pkg-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 24px;
+        }
+
+        .pkg-list {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .pkg-list li {
+            font-size: 0.9rem;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--light-blue);
+            color: var(--charcoal);
+        }
+
+        .pkg-list li::before {
+            content: "• ";
+            color: var(--pink);
+            font-weight: bold;
+        }
+
+        /* Section 10 — Final CTA */
+        .final-cta-section {
+            background-color: var(--navy);
+            color: var(--white);
+            padding: 120px 0;
+            text-align: center;
+        }
+
+        .final-cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .final-cta-section h2 {
+            color: var(--white);
+            font-size: 2.75rem;
+            margin-bottom: 24px;
+        }
+
+        .final-cta-text {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .final-cta-subtext {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 24px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--charcoal);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 60px 0 30px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--pink);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 20px;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-grid, .deliverables-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .problem-grid, .services-grid, .audience-grid, .timeline-grid, .packages-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pkg-card.featured {
+                transform: scale(1);
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .problem-grid, .services-grid, .audience-grid, .timeline-grid, .packages-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gi-1, .gi-2, .gi-3, .gi-4, .gi-5 {
+                grid-column: span 1 !important;
+            }
+
+            .hero-grid {
+                gap: 30px;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .final-cta-section h2 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .process-flow {
+                flex-direction: column;
+            }
+
+            .process-step, .process-arrow {
+                width: 100%;
+                text-align: center;
+            }
+
+            section {
+                padding: 40px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            .hero-content h1 {
+                font-size: 1.5rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.4rem;
+            }
+
+            .btn {
+                padding: 12px 24px;
+                font-size: 0.85rem;
+            }
+
+            .ava-render {
+                height: 300px;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 30px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-container">
+                <div class="logo">Character Studio</div>
+                <ul class="nav-links">
+                    <li><a href="#problem">Problem</a></li>
+                    <li><a href="#solution">Solution</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#process">Process</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                </ul>
+                <a href="#contact" class="nav-cta">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <span class="eyebrow">AI-Powered Creativity</span>
+                    <h1>Create Stunning 3D Character Ads</h1>
+                    <p class="hero-subhead">Transform your brand story with AI-powered custom 3D characters that captivate and convert.</p>
+                    <p class="hero-support">No design experience required. Professional results in days, not months.</p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary">Start Your Project</button>
+                        <button class="btn btn-secondary">Watch Demo</button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="character-frame">
+                        <div class="ava-render">
+                            <div class="ava-avatar-wrapper">
+                                <div class="ava-badge">AI Character</div>
+                                <div class="video-play-overlay">
+                                    <div class="play-icon"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="hero-tagline">Meet Ava - Your Brand Ambassador</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem-section" id="problem">
+        <div class="container">
+            <div class="section-header">
+                <span class="eyebrow">The Challenge</span>
+                <h2>Why Traditional Advertising Falls Short</h2>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="card-indicator"></div>
+                    <h3>High Production Costs</h3>
+                    <p>Hiring actors, renting studios, and post-production expenses add up quickly.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="card-indicator"></div>
+                    <h3>Time-Consuming Workflows</h3>
+                    <p>Months of planning, shooting, and editing before your ad goes live.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="card-indicator"></div>
+                    <h3>Limited Customization</h3>
+                    <p>Once filmed, making changes means re-shooting entire campaigns.</p>
+                </div>
+            </div>
+            <div class="problem-bottom">
+                <p>What if you could create premium character-driven ads instantly, with infinite customization?</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution-section" id="solution">
+        <div class="container">
+            <div class="section-header">
+                <span class="eyebrow">Our Solution</span>
+                <h2>Meet Character Ad Studio</h2>
+            </div>
+            <div class="solution-content">
+                <p class="solution-body">We combine cutting-edge AI with professional 3D animation to create custom character-driven ads that tell your brand story.</p>
+                <div class="solution-highlight">
+                    <p>Premium character ads created in <span>days</span>, not months. At a fraction of the cost.</p>
+                </div>
+                <div class="process-flow">
+                    <div class="process-step">Describe Your Vision</div>
+                    <div class="process-arrow">→</div>
+                    <div class="process-step">AI Generates Characters</div>
+                    <div class="process-arrow">→</div>
+                    <div class="process-step">We Animate & Polish</div>
+                    <div class="process-arrow">→</div>
+                    <div class="process-step">Ready to Launch</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Study Section -->
+    <section class="case-study-section" id="portfolio">
+        <div class="container">
+            <div class="case-intro">
+                <span class="eyebrow">Case Study</span>
+                <h2>Ava: A Character Come to Life</h2>
+                <p class="case-sub">From concept to viral sensation in 2 weeks</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item gi-1">
+                    <div class="gallery-visual">
+                        <div class="play-btn-small">
+                            <div class="play-icon"></div>
+                        </div>
+                        <p class="gallery-label">Character Design</p>
+                    </div>
+                </div>
+                <div class="gallery-item gi-2">
+                    <div class="gallery-visual">
+                        <div class="play-btn-small">
+                            <div class="play-icon"></div>
+                        </div>
+                        <p class="gallery-label">Animation Work</p>
+                    </div>
+                </div>
+                <div class="gallery-item gi-3">
+                    <div class="gallery-visual">
+                        <div class="play-btn-small">
+                            <div class="play-icon"></div>
+                        </div>
+                        <p class="gallery-label">Final Ad</p>
+                    </div>
+                </div>
+                <div class="gallery-item gi-4">
+                    <div class="gallery-visual">
+                        <div class="play-btn-small">
+                            <div class="play-icon"></div>
+                        </div>
+                        <p class="gallery-label">Social Clips</p>
+                    </div>
+                </div>
+                <div class="gallery-item gi-5">
+                    <div class="gallery-visual">
+                        <div class="play-btn-small">
+                            <div class="play-icon"></div>
+                        </div>
+                        <p class="gallery-label">Extended Cut</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="eyebrow">What We Create</span>
+                <h2>Our Services</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Character Design & Development</h3>
+                    <p>Custom AI-generated 3D characters tailored to your brand personality and target audience.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Product Explainer Videos</h3>
+                    <p>Engaging character-narrated explanations that showcase your product benefits clearly.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Social Media Campaigns</h3>
+                    <p>Short-form, platform-optimized content featuring your brand characters across all channels.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Brand Storytelling</h3>
+                    <p>Authentic narratives brought to life through compelling character-driven advertising.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Animation & Motion Design</h3>
+                    <p>Professional-grade animation that brings your characters to life with stunning visuals.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Voice & Audio Production</h3>
+                    <p>Professional voiceover and sound design to complete your character ads.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Audience Section -->
+    <section class="audience-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="eyebrow">Who It's For</span>
+                <h2>Perfect for Every Brand</h2>
+            </div>
+            <div class="audience-grid">
+                <div class="audience-card">SaaS & Tech Startups</div>
+                <div class="audience-card">E-commerce Brands</div>
+                <div class="audience-card">B2B Companies</div>
+                <div class="audience-card">Consumer Goods</div>
+                <div class="audience-card">Financial Services</div>
+                <div class="audience-card">Healthcare & Wellness</div>
+            </div>
+            <p class="audience-support">Whether you're a fast-growing startup or an established enterprise, Character Ad Studio scales with your needs.</p>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process-section" id="process">
+        <div class="container">
+            <div class="section-header">
+                <span class="eyebrow">How It Works</span>
+                <h2>Our Creative Process</h2>
+            </div>
+            <div class="timeline-grid">
+                <div class="timeline-card">
+                    <div class="step-num">01</div>
+                    <h3>Discovery Call</h3>
+                    <p>We learn about your brand, goals, and vision for your character ads.</p>
+                </div>
+                <div class="timeline-card">
+                    <div class="step-num">02</div>
+                    <h3>Concept Development</h3>
+                    <p>Our team creates character concepts and storyboards for your approval.</p>
+                </div>
+                <div class="timeline-card">
+                    <div class="step-num">03</div>
+                    <h3>AI Generation & Design</h3>
+                    <p>We generate and refine 3D characters using advanced AI technology.</p>
+                </div>
+                <div class="timeline-card">
+                    <div class="step-num">04</div>
+                    <h3>Animation & Delivery</h3>
+                    <p>Professional animation and final delivery in your preferred formats.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deliverables Section -->
+    <section class="deliverables-section">
+        <div class="container">
+            <div class="deliverables-wrapper">
+                <div>
+                    <h2>What You'll Get</h2>
+                    <div class="checklist-grid">
+                        <div class="check-item">Custom 3D character models</div>
+                        <div class="check-item">Professional animations</div>
+                        <div class="check-item">Branded character assets</div>
+                        <div class="check-item">Multiple video formats</div>
+                        <div class="check-item">Social media optimized clips</div>
+                        <div class="check-item">Commercial usage rights</div>
+                        <div class="check-item">Unlimited revisions</div>
+                        <div class="check-item">Ongoing support</div>
+                    </div>
+                </div>
+                <div class="deliverable-highlight-card">
+                    <p>Transform your marketing with <span>character-driven storytelling</span> that resonates with your audience and drives real results.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="packages-section" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <span class="eyebrow">Simple Pricing</span>
+                <h2>Choose Your Package</h2>
+            </div>
+            <div class="packages-grid">
+                <div class="pkg-card">
+                    <div>
+                        <h3 class="pkg-title">Starter</h3>
+                        <p class="pkg-desc">Perfect for testing the waters</p>
+                        <div class="pkg-price">$4,999</div>
+                        <ul class="pkg-list">
+                            <li>1 custom character</li>
+                            <li>1 main video (60 sec)</li>
+                            <li>3 social clips (15 sec)</li>
+                            <li>Basic animation</li>
+                            <li>5 revisions included</li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;">Get Started</button>
+                </div>
+                <div class="pkg-card featured">
+                    <div class="badge-popular">Most Popular</div>
+                    <div>
+                        <h3 class="pkg-title">Professional</h3>
+                        <p class="pkg-desc">Best for growing brands</p>
+                        <div class="pkg-price">$9,999</div>
+                        <ul class="pkg-list">
+                            <li>2 custom characters</li>
+                            <li>2 main videos (60 sec each)</li>
+                            <li>6 social clips (15-30 sec)</li>
+                            <li>Professional animation</li>
+                            <li>10 revisions included</li>
+                            <li>Priority support</li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;">Get Started</button>
+                </div>
+                <div class="pkg-card">
+                    <div>
+                        <h3 class="pkg-title">Enterprise</h3>
+                        <p class="pkg-desc">For large-scale campaigns</p>
+                        <div class="pkg-price">Custom</div>
+                        <ul class="pkg-list">
+                            <li>Multiple characters</li>
+                            <li>Full campaign packages</li>
+                            <li>Custom animation styles</li>
+                            <li>Dedicated account manager</li>
+                            <li>Unlimited revisions</li>
+                            <li>24/7 support</li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-secondary" style="width: 100%;">Contact Us</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="final-cta-section" id="contact">
+        <div class="container">
+            <div class="final-cta-container">
+                <h2>Ready to Transform Your Advertising?</h2>
+                <p class="final-cta-text">Join brands that are revolutionizing their marketing with AI-powered character storytelling.</p>
+                <button class="btn btn-primary">Schedule Your Discovery Call</button>
+                <p class="final-cta-subtext">Free consultation • No credit card required • 30 minutes</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#contact">Contact</a>
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Character Ad Studio. All rights reserved. Powered by AI & Creativity.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Play button interactivity
+        document.querySelectorAll('.video-play-overlay, .play-btn-small').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('Video player would open here');
+            });
+        });
+
+        // Button interactions
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (this.textContent.includes('Get Started') || this.textContent.includes('Schedule')) {
+                    alert('Redirecting to booking form...');
+                } else if (this.textContent.includes('Watch')) {
+                    alert('Opening demo video...');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
