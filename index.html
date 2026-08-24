@@ -572,7 +572,93 @@ p{
 .deliverable-card p{
     color:rgba(255,255,255,.8);
 }
+/* OFFER */
 
+.offer{
+    background:var(--blue);
+}
+
+.offer-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:28px;
+    padding:50px;
+    display:grid;
+    grid-template-columns:1.3fr .7fr;
+    gap:50px;
+    align-items:center;
+    box-shadow:var(--shadow);
+}
+
+.offer-label{
+    display:inline-block;
+    color:var(--pink);
+    font-size:.75rem;
+    font-weight:800;
+    letter-spacing:.12em;
+    margin-bottom:14px;
+}
+
+.offer-content h3{
+    color:var(--navy);
+    font-size:2rem;
+    margin-bottom:14px;
+}
+
+.offer-content > p{
+    max-width:620px;
+}
+
+.offer-checklist{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:25px;
+}
+
+.offer-checklist div{
+    background:var(--blue);
+    padding:12px 14px;
+    border-radius:9px;
+    color:var(--navy);
+    font-size:.88rem;
+    font-weight:700;
+}
+
+.offer-price{
+    background:var(--navy);
+    color:white;
+    padding:35px 28px;
+    border-radius:20px;
+    text-align:center;
+}
+
+.offer-price span{
+    display:block;
+    color:rgba(255,255,255,.7);
+    font-size:.72rem;
+    font-weight:800;
+    letter-spacing:.12em;
+    margin-bottom:8px;
+}
+
+.offer-price strong{
+    display:block;
+    color:white;
+    font-size:3.4rem;
+    line-height:1;
+    margin-bottom:15px;
+}
+
+.offer-price p{
+    color:rgba(255,255,255,.72);
+    font-size:.78rem;
+    margin-bottom:22px;
+}
+
+.offer-price .btn{
+    width:100%;
+}
 /* CTA */
 
 .cta{
@@ -692,11 +778,12 @@ footer p{
     }
 
     .hero-grid,
-    .solution-box,
-    .case-grid,
-    .deliverable-grid{
-        grid-template-columns:1fr;
-    }
+.solution-box,
+.case-grid,
+.deliverable-grid,
+.offer-card{
+    grid-template-columns:1fr;
+}
 
     .cards,
     .service-grid,
@@ -723,7 +810,22 @@ footer p{
 }
 
 @media(max-width:600px){
+.offer-card{
+    padding:30px 20px;
+    gap:30px;
+}
 
+.offer-checklist{
+    grid-template-columns:1fr;
+}
+
+.offer-content h3{
+    font-size:1.7rem;
+}
+
+.offer-price strong{
+    font-size:2.8rem;
+}
     section{
         padding:65px 0;
     }
@@ -1233,7 +1335,74 @@ Instead of creating one disposable advertisement, you can build a recognizable v
 
 </section>
 
+<!-- OFFER -->
 
+<section class="offer">
+
+<div class="container">
+
+<div class="section-title">
+
+<span class="eyebrow">THE SIGNATURE OFFER</span>
+
+<h2>
+AI Character Ad
+</h2>
+
+<p>
+A custom short-form 3D character advertisement built around your brand, product and story.
+</p>
+
+</div>
+
+<div class="offer-card">
+
+<div class="offer-content">
+
+<span class="offer-label">CUSTOM CHARACTER-DRIVEN AD</span>
+
+<h3>
+Turn your product into a story people remember.
+</h3>
+
+<p>
+From character concept to finished social-ready video, I create a complete character-driven advertising experience tailored to your brand.
+</p>
+
+<div class="offer-checklist">
+
+<div>✓ Custom 3D character concept</div>
+<div>✓ Advertising story and concept</div>
+<div>✓ Character-consistent scenes</div>
+<div>✓ AI-generated 3D visuals</div>
+<div>✓ Animation and sound direction</div>
+<div>✓ Final social-ready video</div>
+
+</div>
+
+</div>
+
+<div class="offer-price">
+
+<span>STARTING FROM</span>
+
+<strong>$250</strong>
+
+<p>
+Final price depends on video length, number of scenes and production complexity.
+</p>
+
+<a href="#brief" class="btn btn-primary">
+GET MY FREE AD CONCEPT
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
 <!-- CTA -->
 
 <section class="cta">
